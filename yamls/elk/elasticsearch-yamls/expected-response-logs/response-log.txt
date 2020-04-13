@@ -1,0 +1,19 @@
+After a couple of minutes, each node of the cluster should reconcile and the master node 
+should log the following sentence Cluster health status changed from [YELLOW] to [GREEN].
+
+Call below commands to check status:
+
+$ kubectl logs -f -n monitoring \
+  $(kubectl get pods -n monitoring | grep elasticsearch-master | sed -n 1p | awk '{print $1}') \
+  | grep "Cluster health status changed from \[YELLOW\] to \[GREEN\]"
+
+{ "type": "server",
+  "timestamp": "2019-08-15T15:09:43,825+0000",
+  "level": "INFO",
+  "component": "o.e.c.r.a.AllocationService",
+  "cluster.name": "elasticsearch",
+  "node.name": "elasticsearch-master",
+  "cluster.uuid": "iWgG2n5WSAC05Hvpeq5m4A",
+  "node.id": "LScYW6eZTQiUgwRDzCvxRQ",
+  "message": "Cluster health status changed from [YELLOW] to [GREEN] (reason: [shards started [[.monitoring-es-7-2019.08.15][0]] ...])."
+}

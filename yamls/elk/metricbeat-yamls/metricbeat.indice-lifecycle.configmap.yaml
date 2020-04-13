@@ -1,0 +1,43 @@
+# ElasticSearch indice lifecycle represents a set of rules you want to apply to your indices based on the size 
+# or the age of the indice. So for example, it's possible to rollover the indice (create a new file) every day 
+# or every time it exceed 1GB, we can also configure different phases based 
+# on rule (hot for active read/write indice, cold for read-only and delete to delete the indice). 
+
+# Monitoring can generate a large amount of data, perhaps more than 10GB a day, so to prevent spending 
+# to much money on cloud storage, we can use the indice lifecycle to configure data retention easily.
+
+# In the file below, we configure to rollover the indice every day or every time it 
+# exceeds 1GB and delete all indice files older than 30 days. We only keep 30 days of monitoring data
+
+# metricbeat.indice-lifecycle.configmap.yml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: monitoring
+  name: metricbeat-indice-lifecycle
+  labels:
+    app: metricbeat
+data:
+  indice-lifecycle.json: |-
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_size": "1GB" ,
+                "max_age": "1d"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "30d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+---

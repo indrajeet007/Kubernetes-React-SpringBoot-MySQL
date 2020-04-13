@@ -1,0 +1,7 @@
+Check the logs for Status changed from yellow to green.
+
+$ kubectl logs -f -n monitoring $(kubectl get pods -n monitoring | grep kibana | sed -n 1p | awk '{print $1}') \
+     | grep "Status changed from yellow to green"
+
+{"type":"log","@timestamp":"2019-08-16T08:56:04Z","tags":["status","plugin:maps@7.3.0","info"],"pid":1,"state":"green","message":"Status changed from yellow to green - Ready","prevState":"yellow","prevMsg":"Waiting for Elasticsearch"}
+{"type":"log","@timestamp":"2019-08-16T08:56:13Z","tags":["status","plugin:spaces@7.3.0","info"],"pid":1,"state":"green","message":"Status changed from yellow to green - Ready","prevState":"yellow","prevMsg":"Waiting for Elasticsearch"}

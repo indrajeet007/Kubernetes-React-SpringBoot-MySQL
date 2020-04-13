@@ -1,0 +1,7 @@
+# Define 'Configmap' to store non-sensitive frontend to backend connectivity configuration 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config  # name of ConfigMap, referenced in other files
+data:
+  backend_api_url: http://192.168.64.10:31019 || springboot-crud.monitoring.svc.cluster.local

@@ -1,0 +1,47 @@
+# Define 'Service' to expose frontend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-crud  
+spec:
+  selector:  # frontend application pod lables should match these
+    app: frontend-crud-app
+    tier: frontend
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 3000
+  type: NodePort   # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of frontend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-crud
+  labels: 
+    app: frontend-crud-app
+    tier: frontend
+spec:
+  replicas: 3    # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # frontend application pod labels should match these
+      app: frontend-crud-app
+      tier: frontend
+  template:
+    metadata:
+      labels: # Must macth 'Service' and 'Deployment' labels
+        app: frontend-crud-app
+        tier: frontend  
+    spec:                 
+      containers: 
+      - name: frontend-crud 
+        image: indrajit0072/frontend-poc:1.1.0   # docker image of frontend application
+        imagePullPolicy: Always
+        env:   # Setting Enviornmental Variables
+        - name: REACT_APP_BACKEND_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: backend_api_url
+        ports:
+        - containerPort: 3000

@@ -1,0 +1,93 @@
+# ReplicaSet is similar to the deployment but involves storage, 
+# you can identify a volumeClaimTemplates at the bottom of the file to create a persistent volume of 5GB.
+
+# in production volume size needs to be more than ~50GB.
+
+# elasticsearch-data.replicaset.yaml
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: monitoring
+  name: elasticsearch-data
+  labels:
+    app: elasticsearch
+    role: data
+spec:
+  serviceName: "elasticsearch-data"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch-data
+      role: data
+  template:
+    metadata:
+      labels:
+        app: elasticsearch-data
+        role: data
+    spec:
+      containers:
+      - name: elasticsearch-data
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+        env:
+        - name: CLUSTER_NAME
+          value: elasticsearch
+        - name: NODE_NAME
+          value: elasticsearch-data
+        - name: NODE_LIST
+          value: elasticsearch-master,elasticsearch-data,elasticsearch-client
+        - name: MASTER_NODES
+          value: elasticsearch-master
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms1024m -Xmx1024m"
+        ports:
+        - containerPort: 9300
+          name: transport
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          readOnly: true
+          subPath: elasticsearch.yml
+        - name: elasticsearch-data-persistent-storage
+          mountPath: /data/db
+        - name: data
+          mountPath: /usr/share/elasticsearch/data
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          command: ["sh", "-c", "chown -R 1000:1000 /usr/share/elasticsearch/data"]
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - name: data
+            mountPath: /usr/share/elasticsearch/data
+        - name: increase-vm-max-map
+          image: busybox
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
+          securityContext:
+            privileged: true
+        - name: increase-fd-ulimit
+          image: busybox
+          command: ["sh", "-c", "ulimit -n 65536"]
+          securityContext:
+            privileged: true
+      volumes:
+      - name: config
+        configMap:
+          name: elasticsearch-data-config
+      - name: data
+        emptyDir:
+          medium: ""
+  volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-data-persistent-storage
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 5Gi
+---
+

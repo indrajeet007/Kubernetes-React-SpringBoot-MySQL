@@ -1,0 +1,32 @@
+# The second node of the cluster we're going to setup is the data 
+# which is responsible of hosting the data and executing the queries (CRUD, search, aggregation)
+# Like the master node, we need a ConfigMap to configure our node which looks similar to the master node 
+# but differs a little bit (see node.data: true)
+
+# elasticsearch-data.configmap.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: monitoring
+  name: elasticsearch-data-config
+  labels:
+    app: elasticsearch
+    role: data
+data:
+  elasticsearch.yml: |-
+    cluster.name: ${CLUSTER_NAME}
+    node.name: ${NODE_NAME}
+    discovery.seed_hosts: ${NODE_LIST}
+    cluster.initial_master_nodes: ${MASTER_NODES}
+
+    network.host: 0.0.0.0
+
+    node:
+      master: false
+      data: true
+      ingest: false
+
+    xpack.security.enabled: true
+    xpack.monitoring.collection.enabled: true
+---

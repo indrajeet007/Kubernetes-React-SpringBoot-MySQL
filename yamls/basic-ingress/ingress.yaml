@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: application-web-ui
+spec:
+  # tls:
+  #   - secretName: poc-wu-tls
+  #     hosts:
+  #       - poc.wu
+  rules:
+    - host: poc.wu
+      http:
+        paths:
+          - backend:
+              serviceName: frontend-crud
+              servicePort: 80
+
