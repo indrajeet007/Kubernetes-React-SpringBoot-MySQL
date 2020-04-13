@@ -1,0 +1,10 @@
+# backend ignore
+.DS_Store
+.idea/
+target/
+
+# frontend ignore
+node_modules
+Dockerfile
+.dockerignore
+npm-debug.log
