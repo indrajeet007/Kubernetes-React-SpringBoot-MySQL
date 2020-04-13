@@ -2,7 +2,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: application-web-ui
+  name: kibana-web-ui
+  namespace: monitoring
 spec:
   # tls:
   #   - secretName: poc-wu-tls
@@ -12,9 +13,7 @@ spec:
     - host: poc.wu
       http:
         paths:
-          - path: /
+          - path: /kibana
             backend:
-              serviceName: frontend-crud
-              servicePort: 80
-
-
+              serviceName: kibana
+              servicePort: 5601

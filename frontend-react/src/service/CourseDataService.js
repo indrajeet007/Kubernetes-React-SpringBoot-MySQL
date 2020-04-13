@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // const BACKEND_API_URL = `minikube ip`
 
-export const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL || 'http://192.168.64.10:31019'
+export const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL
 
 class CourseDataService {
 

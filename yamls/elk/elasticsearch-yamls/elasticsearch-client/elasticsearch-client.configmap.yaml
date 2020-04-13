@@ -26,4 +26,5 @@ data:
 
     xpack.security.enabled: true
     xpack.monitoring.collection.enabled: true
+    xpack.security.http.ssl.enabled: true
 ---
