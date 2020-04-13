@@ -23,18 +23,6 @@ public class Application implements CommandLineRunner {
     @Autowired
     private Environment environment;
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
-                registry.addMapping("/api/v1/products").allowedOrigins("http://192.168.64.10:30978, http://localhost:3000");
-                registry.addMapping("/listenvs").allowedOrigins("http://192.168.64.10:30978, http://localhost:3000");
-            }
-        };
-    }
-
     @Override
     public void run(String... args) throws Exception {
 
