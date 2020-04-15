@@ -16,5 +16,10 @@ spec:
             backend:
               serviceName: frontend-crud
               servicePort: 80
+          - path: /sonar
+            backend:
+              serviceName: sonar
+              servicePort: 80
+
 
 

@@ -1,0 +1,6 @@
+projectKey=backend-spring-boot
+serverUrl=http://192.168.64.10:31135
+serverVersion=7.9.1.27448
+dashboardUrl=http://192.168.64.10:31135/dashboard?id=backend-spring-boot
+ceTaskId=AXF4H7oMC1lWS8bWxNfs
+ceTaskUrl=http://192.168.64.10:31135/api/ce/task?id=AXF4H7oMC1lWS8bWxNfs
