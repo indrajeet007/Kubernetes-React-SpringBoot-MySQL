@@ -1,0 +1,4 @@
+# to map these hosts from cluster to localhost
+
+echo "$(minikube ip) example.com" | sudo tee -a /etc/hosts
+

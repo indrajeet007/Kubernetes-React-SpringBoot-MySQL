@@ -28,7 +28,6 @@ data:
 
     xpack.security.enabled: true
     xpack.monitoring.collection.enabled: true
-    xpack.security.http.ssl.enabled: true
 ---
 
 # https://stackoverflow.com/questions/56318110/transport-ssl-must-be-enabled-if-security-is-enabled-on-a-basic-license

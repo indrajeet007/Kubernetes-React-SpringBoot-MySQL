@@ -4,16 +4,19 @@ kind: Ingress
 metadata:
   name: kibana-web-ui
   namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   # tls:
   #   - secretName: poc-wu-tls
   #     hosts:
   #       - poc.wu
   rules:
-    - host: poc.wu
+    - host: kibana.wu
       http:
         paths:
-          - path: /kibana
+          - path: /
             backend:
               serviceName: kibana
               servicePort: 5601
