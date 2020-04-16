@@ -138,47 +138,47 @@ class ListCoursesComponent extends Component {
                 <br />
                 <br />
                 <div className="col-md-12 row" style={{ alignContent: 'center' }}>
-                <div className="container" style={{ paddingBottom: 40 }}>
-                    <h4 align="center">Environment Variables (Frontend)</h4>
-                    <TableContainer component={Paper}>
-                        <Table aria-label="simple table" size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell style={{ textAlign: 'center' }}>ENV_KEY</TableCell>
-                                    <TableCell style={{ textAlign: 'center' }}>VALUE</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell style={{ textAlign: 'center' }}>BACKEND_API_URL</TableCell>
-                                    <TableCell style={{ textAlign: 'center' }}>{BACKEND_API_URL}</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <div className="container" style={{ paddingBottom: 40 }}>
+                        <h4 align="center">Environment Variables (Frontend)</h4>
+                        <TableContainer component={Paper}>
+                            <Table aria-label="envfrontend" size="small">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell style={{ textAlign: 'center' }}>ENV_KEY</TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}>VALUE</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell style={{ textAlign: 'center' }}>BACKEND_API_URL</TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}>{BACKEND_API_URL}</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
                     <div className="container">
-                    <h4 align="center">Environment Variables (Backend)</h4>
-                    <TableContainer component={Paper}>
-                        <Table aria-label="simple table another" size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell style={{ textAlign: 'center' }}>ENV_KEY</TableCell>
-                                    <TableCell style={{ textAlign: 'center' }}>VALUE</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                            {
-                                this.state.mappedBackEnd.map((mappedEnv) => (
-                                    <TableRow key={mappedEnv[0]}>
-                                        <TableCell style={{ textAlign: 'center' }}>{mappedEnv[0]}</TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}>{mappedEnv[1]}</TableCell>
+                        <h4 align="center">Environment Variables (Backend)</h4>
+                        <TableContainer component={Paper}>
+                            <Table aria-label="envbackend" size="small">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell style={{ textAlign: 'center' }}>ENV_KEY</TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}>VALUE</TableCell>
                                     </TableRow>
-                                ))
-                            }
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                                </TableHead>
+                                <TableBody>
+                                {
+                                    this.state.mappedBackEnd.map((mappedEnv) => (
+                                        <TableRow key={mappedEnv[0]}>
+                                            <TableCell style={{ textAlign: 'center' }}>{mappedEnv[0]}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{mappedEnv[1]}</TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
                 </div>
             </div>
