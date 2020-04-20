@@ -11,7 +11,6 @@ import java.util.Map;
 @Controller
 public class ProductController {
 
-    @CrossOrigin(origins = "http://192.168.64.10:30978, http://localhost:3000")
     @GetMapping("/")
     public String list(){
         return "products";

@@ -48,7 +48,7 @@ class CourseComponent extends Component {
     }
 
     onSubmit(values) {
-        let course = {
+        let product = {
             id: this.state.id,
             name: values.name,
             description: values.description,
@@ -56,12 +56,14 @@ class CourseComponent extends Component {
             targetDate: values.targetDate
         }
 
+        console.log("Product: ", product)
+
         if (this.state.id === -1) {
-            CourseDataService.createCourse(course)
-                .then(() => this.props.history.push('/courses'))
+            CourseDataService.createCourse(product)
+                .then(() => this.props.history.push('/products'))
         } else {
-            CourseDataService.updateCourse(this.state.id, course)
-                .then(() => this.props.history.push('/courses'))
+            CourseDataService.updateCourse(this.state.id, product)
+                .then(() => this.props.history.push('/products'))
         }
 
         console.log(values);
@@ -105,7 +107,7 @@ class CourseComponent extends Component {
                                     </fieldset>
                                     <button className="btn btn-success" type="submit">Save</button>
                                     <button type="submit" className="btn btn-primary">Create</button>
-                                    <button type="submit" className="btn btn-danger" onClick="">Cancel</button>
+                                    <button type="submit" className="btn btn-danger" onClick={() => this.props.history.push('/')}>Cancel</button>
                                 </Form>
                             )
                         }

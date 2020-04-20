@@ -14,7 +14,7 @@ class ListCoursesComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            courses: [],
+            products: [],
             envs: [],
             mappedBackEnd: [],
             message: null
@@ -35,7 +35,7 @@ class ListCoursesComponent extends Component {
         var self = this;
         CourseDataService.retrieveAllCourses()
             .then(function(response) {
-                    self.setState({ courses: response.data })       
+                    self.setState({ products: response.data })       
                 }
             )
             .catch(function (error) {
@@ -74,12 +74,12 @@ class ListCoursesComponent extends Component {
     }
 
     addCourseClicked() {
-        this.props.history.push(`/courses/-1`)
+        this.props.history.push(`/products/-1`)
     }
 
     updateCourseClicked(id) {
         console.log('update ' + id)
-        this.props.history.push(`/courses/${id}`)
+        this.props.history.push(`/products/${id}`)
     }
 
     
@@ -113,16 +113,16 @@ class ListCoursesComponent extends Component {
                             </thead>
                             <tbody align="center">
                                 {
-                                    this.state.courses.map(
-                                        course =>
-                                            <tr align="center" key={course.id}>
-                                                <td>{course.id}</td>
-                                                <td>{course.name}</td>
-                                                <td>{course.description}</td>
-                                                <td>{course.price}</td>
+                                    this.state.products.map(
+                                        product =>
+                                            <tr align="center" key={product.id}>
+                                                <td>{product.id}</td>
+                                                <td>{product.name}</td>
+                                                <td>{product.description}</td>
+                                                <td>{product.price}</td>
                                                 <td>
-                                                    <button className="btn btn-success" onClick={() => this.updateCourseClicked(course.id)}>Update</button>
-                                                    <button style={{ marginLeft: 20 }} className="btn btn-warning" onClick={() => this.deleteCourseClicked(course.id)}>Delete</button>
+                                                    <button className="btn btn-success" onClick={() => this.updateCourseClicked(product.id)}>Update</button>
+                                                    <button style={{ marginLeft: 20 }} className="btn btn-warning" onClick={() => this.deleteCourseClicked(product.id)}>Delete</button>
                                                 </td>
                                             </tr>
                                     )
