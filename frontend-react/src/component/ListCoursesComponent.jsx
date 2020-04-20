@@ -88,7 +88,7 @@ class ListCoursesComponent extends Component {
         console.log('render')
         return (
             <div className="container">
-                <h4 align="center" style={{ paddingBottom: 30 }}>Service Container: {this.state.envs.map(el => el.HOSTNAME)}</h4>
+                <h4 align="center" style={{ paddingBottom: 30 }}>Service Container at the moment: {this.state.envs.map(el => el.HOSTNAME)}</h4>
                 <h3 align="center">Start Listing</h3>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div>
