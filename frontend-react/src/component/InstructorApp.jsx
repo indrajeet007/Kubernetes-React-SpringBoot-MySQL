@@ -12,7 +12,7 @@ class InstructorApp extends Component {
                         <center>
                         <img style={{ width: 250, height: 100 }} src="https://businesstraffic.com.ng/wp-content/uploads/2019/11/Western-Union.png" alt="company-logo"></img>
                         </center>
-                        <h1 align="center">To-Do Application</h1>
+                        <h1 align="center">To-Do Application New Change</h1>
                         
                         <Switch>
                             <Route path="/" exact component={ListCoursesComponent} />
